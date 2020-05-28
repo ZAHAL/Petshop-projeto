@@ -100,6 +100,9 @@ export class PetComponent implements OnInit {
         });
   }
 
+  deletar(pet: any, table: Table) {
+    this.confirmarDeletar(pet, table);
+  }
 
   showSuccess(mensagem) {
     this.msgs = [];

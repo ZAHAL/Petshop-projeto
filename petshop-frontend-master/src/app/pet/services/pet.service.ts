@@ -13,21 +13,13 @@ export class PetService {
 
     constructor(private http: HttpClient) {}
 
-    httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      };
-
-      httpOptionsEditar = {
-        headers: new HttpHeaders({ responseType: 'text' })
-    };
-
-
+    
     getPets (): Observable<Pet[]> {
         return this.http.get<Pet[]>(this.resourceUrl);
     }
 
     salvar(pet: Pet): Observable<Pet> {
-            return this.http.post<any>('api/pet', Pet);
+            return this.http.post<any>('api/pet', pet);
     }
 
     delete(id){

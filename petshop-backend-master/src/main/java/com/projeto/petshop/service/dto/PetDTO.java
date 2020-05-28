@@ -9,6 +9,7 @@ public class PetDTO {
     private String genero;
     private String raca;
     private Integer idade;
+    private String nomeCliente;
 
     public Long getId() {
         return id;
@@ -56,5 +57,13 @@ public class PetDTO {
 
     public void setIdade(Integer idade) {
         this.idade = idade;
+    }
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
 }

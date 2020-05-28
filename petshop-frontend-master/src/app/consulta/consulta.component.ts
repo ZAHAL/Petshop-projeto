@@ -6,6 +6,7 @@ import { Veterinario } from '../veterinario/models/veterinario';
 import { ConsultaServive } from './services/consulta.service';
 import { VeterinarioService } from '../veterinario/services/veterinario.service';
 import { Router } from '@angular/router';
+import { PetService } from '../pet/services/pet.service';
 
 @Component({
   selector: 'app-consulta',
@@ -30,6 +31,7 @@ export class ConsultaComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private consultaService: ConsultaServive,
     private veterinarioService: VeterinarioService,
+    private petService: PetService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -77,7 +79,15 @@ export class ConsultaComponent implements OnInit {
   carregarPets(){
     this.petList = [];
     this.petList.push({label: 'Selecione um Pet', value: null});
-    this.petList.push({label: 'Melissa', value: 1});
+    this.petService.getPets().subscribe(
+      data => {
+        this.pets = data;
+        for (let p of this.pets) {
+        this.petList.push({ label: p.nome, value: p.id});
+        }
+      }
+    );
+
   }
 
   carregarTipoAgendamento(){

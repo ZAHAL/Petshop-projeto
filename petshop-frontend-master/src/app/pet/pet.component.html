@@ -1,6 +1,7 @@
+<p-messages [(value)]="msgs"></p-messages>
 <div class="ui-g ui-fluid">
     <div class="ui-g-12">
-        <p-panel header="Pets">
+        <p-panel header="PETS">
             <div class="card card-w-title">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-md-12">
@@ -9,12 +10,13 @@
                         </div>
                     </div>
             <div class="ui-g-12 ui-md-12">
-                <p-table [value]="pets">
+                <p-table [value]="pets" #data>
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Nome</th>
                             <th>Espécie</th>
                             <th>Raça</th>
+                            <th style="width: 134px;">Ações</th>
 
                         </tr>
                     </ng-template>
@@ -23,6 +25,16 @@
                             <td>{{pet.nome}}</td>
                             <td>{{pet.especie}}</td>
                             <td>{{pet.raca}}</td>
+                            <td style="width: 134px;">
+                                <div class="ui-g-12" style="padding: 0;">
+                                    <div class="ui-g-2 ui-md-2" style="padding: 0; padding-left: 32px;">
+                                        <button pButton type="button" (click)="abrirEditar(pet, data)" icon="pi pi-pencil"></button>
+                                    </div>
+                                    <!--<div class="ui-g-2 ui-md-2" style="padding: 0; padding-left: 40px;">
+                                        <button pButton type="button" (click)="deletar(pet, data)" icon="pi pi-trash"></button>
+                                    </div>-->
+                                </div>
+                            </td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -32,7 +44,8 @@
         </p-panel>
     
     </div>
-</div>
+<<p-messages [(value)]="msgs"></p-messages>
+    /div>
 
 <p-dialog [(visible)]="display" [style]="{width: '400px'}" [contentStyle]="{'height':'400px'}">
     <p-header>
@@ -145,3 +158,12 @@
    
     
 </p-dialog>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" #dialogDelete >
+    <p-footer>
+        <div class="ui-g-12">
+            <button pButton icon="pi pi-times" label="Não" class="btnNao" (click)="dialogDelete.reject()"></button>
+            <button pButton icon="pi pi-check" label="Sim" class="btnSim" (click)="dialogDelete.accept()"></button>
+        </div>
+      </p-footer>  
+</p-confirmDialog>

@@ -26,6 +26,10 @@ public class Pet {
     @Column(name = "IDADE", nullable = false, length = 14)
     private Integer idade;
 
+    @Column(name = "NOME_CLIENTE", nullable = false, length = 60)
+    private String nomeCliente;
+
+
     public Pet() {
     }
 
@@ -77,15 +81,24 @@ public class Pet {
         this.nome = nome;
     }
 
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
     @Override
     public String toString() {
         return "Pet{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", especie=" + especie +
+                ", especie='" + especie + '\'' +
                 ", genero='" + genero + '\'' +
                 ", raca='" + raca + '\'' +
-                ", idade='" + idade + '\'' +
+                ", idade=" + idade +
+                ", nomeCliente='" + nomeCliente + '\'' +
                 '}';
     }
 }

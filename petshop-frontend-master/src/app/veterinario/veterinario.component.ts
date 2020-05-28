@@ -192,7 +192,7 @@ export class VeterinarioComponent implements OnInit {
 
   }
 
-  deletarCliente(veterinario: any, table: Table) {
+  deletar(veterinario: any, table: Table) {
     this.confirmarDeletar(veterinario, table);
   }
 
