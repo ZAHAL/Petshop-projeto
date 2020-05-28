@@ -1,0 +1,93 @@
+<p-messages [(value)]="msgs"></p-messages>
+
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <p-panel header="CONSULTA" [style]="{'margin-bottom':'20px','margin-left':'300px','margin-right':'300px'}">
+                <form [formGroup]="form" novalidate>
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12">
+                            <div class="ui-g form-group">
+                                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+                                    <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+                                        <div class="ui-g-5 ui-sm-5 ui-md-5 ui-lg-5 ui-xl-5">
+                                            <div class="ui-inputgroup">
+                                                <span class="ui-inputgroup-addon"><i class="fa fa-user-md"
+                                                        aria-hidden="true"></i></span>
+                                            
+                                                    <p-dropdown [options]="veterinarioList" [(ngModel)]="agenda.veterinarioId" formControlName="veterinario"></p-dropdown>
+                                            </div>
+                                            <span class="md-inputfield">
+                                                <div *ngIf="isValidado('veterinario')" class="ui-message ui-messages-error">
+                                                    Preenchimento obrigatório
+                                                </div>
+                                            </span>
+                                            
+                                        </div>
+                                        <div class="ui-g-1 ui-sm-1 ui-md-1 ui-lg-1 ui-xl-1"></div>
+                                        <div class="ui-g-5 ui-sm-5 ui-md-5 ui-lg-5 ui-xl-5">
+                                            <div class="ui-inputgroup">
+                                                <span class="ui-inputgroup-addon"><i class="fa fa-paw"
+                                                        aria-hidden="true"></i></span>
+                                            
+                                                    <p-dropdown [options]="petList" [(ngModel)]="agenda.petId" formControlName="pet"></p-dropdown>
+                                            </div>
+                                            <span class="md-inputfield">
+                                                <div *ngIf="isValidado('pet')" class="ui-message ui-messages-error">
+                                                    Preenchimento obrigatório
+                                                </div>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+                                        <div class="ui-g-5 ui-sm-5 ui-md-5 ui-lg-5 ui-xl-5">
+                                            <div class="ui-inputgroup">
+                                                <span class="ui-inputgroup-addon"><i class="fas fa-notes-medical"></i></span>
+                                            
+                                                    <p-dropdown [options]="tipoAgendamentoList" [(ngModel)]="agenda.tipoAgendamentoId" formControlName="tipoAgendamento"></p-dropdown>
+                                            </div>
+                                            <span class="md-inputfield">
+                                                <div *ngIf="isValidado('tipoAgendamento')" class="ui-message ui-messages-error">
+                                                    Preenchimento obrigatório
+                                                </div>
+                                            </span>
+                                            
+                                        </div>
+                                        <div class="ui-g-1 ui-sm-1 ui-md-1 ui-lg-1 ui-xl-1"></div>
+                                        <div class="ui-g-6 ui-sm-6 ui-md-6 ui-lg-6 ui-xl-6" style="width: 46%;">
+                                            <span class="md-inputfield">
+                                                <p-calendar placeholder="Data do Agendamento" [showTime]="true" [locale]="dataBr" [yearNavigator]="true" [monthNavigator]="true" dateFormat="dd/mm/yy" yearRange="1950:2030" [(ngModel)]="agenda.dataAgendamento" formControlName="dataAgendamento" [showIcon]="true"></p-calendar>
+                                            </span>
+                                            <span class="md-inputfield">
+                                                <div *ngIf="isValidado('dataAgendamento')" class="ui-message ui-messages-error">
+                                                    Preenchimento obrigatório
+                                                </div>
+                                             </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <p-footer>
+                        <button pButton type="button" label="Calendário" class="ui-button-info" style="margin-right: .25em;width: 49%;"></button>
+                        <button pButton type="button" label="Salvar" class="ui-button-success" (click)="salvar()" style="width: 49%;"></button>
+                </p-footer>
+            </p-panel>
+        </div>
+    </div>
+</div>
+
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" #dialogDelete >
+    <p-footer>
+        <div class="ui-g-12">
+            <button pButton icon="pi pi-times" label="Não" class="btnNao" (click)="dialogDelete.reject()"></button>
+            <button pButton icon="pi pi-check" label="Sim" class="btnSim" (click)="dialogDelete.accept()"></button>
+        </div>
+      </p-footer>  
+</p-confirmDialog>

@@ -1,0 +1,163 @@
+<p-messages [(value)]="msgs"></p-messages>
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <p-panel header="VETERINÁRIOS" [style]="{'margin-bottom':'20px'}">
+
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12">
+                        <div class="ui-g-12 ui-md-12 ui-lg-2">
+                            <button pButton type="button" label="CADASTRAR" (click)="cadastrar()"></button>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <p-table [value]="veterinarios" #data>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Especialidade</th>
+                                    <th style="width: 134px;">Ações</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-veterinario>
+                                <tr>
+                                    <td>{{veterinario.nome}}</td>
+                                    <td>{{veterinario.tipoEspecialidade}}</td>
+                                    <td style="width: 134px;">
+                                        <div class="ui-g-12" style="padding: 0;">
+                                            <div class="ui-g-2 ui-md-2" style="padding: 0; padding-left: 32px;">
+                                                <button pButton type="button" (click)="abrirEditar(veterinario, data)" icon="pi pi-pencil"></button>
+                                            </div>
+                                            <div class="ui-g-2 ui-md-2" style="padding: 0; padding-left: 40px;">
+                                                <button pButton type="button" (click)="deletarCliente(veterinario, data)" icon="pi pi-trash"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+
+
+            </p-panel>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="display" [style]="{width: '400px'}" [contentStyle]="{'height':'400px'}">
+    <p-header>
+        NOVO VETERINÁRIO
+    </p-header>
+    <form *ngIf="display" [formGroup]="form" novalidate>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+                <div class="ui-g form-group">
+                    <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+                        <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                <input type="text" formControlName="nome" class="input-forms" pInputText
+                                    placeholder="Nome" [(ngModel)]="veterinario.nome">
+                            </div>
+                            <span class="md-inputfield">
+                                <div *ngIf="isValidado('nome')" class="ui-message ui-messages-error">
+                                    Preenchimento obrigatório
+                                </div>
+                            </span>
+
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                            
+                                <!--<input [dropSpecialCharacters]="false" type="text" mask="00/00/0000" formControlName="dataNascimento" class="input-forms" pInputText
+                                    placeholder="Data de Nascimento" [(ngModel)]="veterinario.dataNascimento">-->
+                                
+                                
+                            
+                            <span class="md-inputfield">
+                                <p-calendar [locale]="dataBr" placeholder="Data de Nascimento" [yearNavigator]="true" [monthNavigator]="true" dateFormat="dd/mm/yy" yearRange="1950:2030" [(ngModel)]="veterinario.dataNascimento" formControlName="dataNascimento" [showIcon]="true"></p-calendar>
+                            </span>
+                            <span class="md-inputfield">
+                                <div *ngIf="isValidado('dataNascimento')" class="ui-message ui-messages-error">
+                                    Preenchimento obrigatório
+                                </div>
+                             </span>
+
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                            <div class="ui-g-4 ui-md-4" style="padding: 0;width: 12%;">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fa fa-venus-mars"></i></span>
+                                </div>
+                            </div>
+                            <div class="ui-g-4 ui-md-4"
+                                style="padding: 0;padding-top: 7px;width: 40%;padding-left: 15px;">
+                                <p-radioButton name="sexo" formControlName="sexo" value="F" label="Feminino"
+                                    [(ngModel)]="veterinario.sexo"></p-radioButton>
+                            </div>
+                            <div class="ui-g-4 ui-md-4" style="padding: 0;width: 35%;padding-top: 7px;">
+                                <p-radioButton name="sexo" value="M" formControlName="sexo" label="Masculino"
+                                    [(ngModel)]="veterinario.sexo"></p-radioButton>
+                            </div>
+                            <span class="md-inputfield">
+                                <div *ngIf="isValidado('sexo')" class="ui-message ui-messages-error">
+                                    Preenchimento obrigatório
+                                </div>
+                            </span>
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="far fa-address-card"
+                                        aria-hidden="true"></i></span>
+
+                                    <input type="text" [dropSpecialCharacters]="false" mask="000.000.000-00" formControlName="cpf" class="input-forms" pInputText
+                                    placeholder="CPF" [(ngModel)]="veterinario.cpf">
+
+                            </div>
+                            <span class="md-inputfield">
+                                <div *ngIf="isValidado('cpf')" class="ui-message ui-messages-error">
+                                    Preenchimento obrigatório
+                                </div>
+                            </span>
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12" style="width: 91.7%;">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="fa fa-user-md"
+                                        aria-hidden="true"></i></span>
+                            
+                                    <p-dropdown [options]="especialidadesList" [(ngModel)]="veterinario.especialidadeId" formControlName="especialidade"></p-dropdown>
+                            </div>
+                            <span class="md-inputfield">
+                                <div *ngIf="isValidado('especialidade')" class="ui-message ui-messages-error">
+                                    Preenchimento obrigatório
+                                </div>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <p-footer>
+        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+            <button pButton name="cancelar" id="cancelar" label="Cancelar" class="btnCancelar"
+                (click)="display = false;"></button>
+            <button pButton name="salvar" id="salvar" label="Salvar" class="btnNovo" (click)="salvar()"></button>
+        </div>
+    </p-footer>
+
+
+</p-dialog>
+
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" #dialogDelete >
+    <p-footer>
+        <div class="ui-g-12">
+            <button pButton icon="pi pi-times" label="Não" class="btnNao" (click)="dialogDelete.reject()"></button>
+            <button pButton icon="pi pi-check" label="Sim" class="btnSim" (click)="dialogDelete.accept()"></button>
+        </div>
+      </p-footer>  
+</p-confirmDialog>

@@ -1,0 +1,147 @@
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+        <p-panel header="Pets">
+            <div class="card card-w-title">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12">
+                        <div class="ui-g-12 ui-md-12 ui-lg-2">
+                            <button pButton type="button" label="CADASTRAR" (click)="cadastrar()" ></button>
+                        </div>
+                    </div>
+            <div class="ui-g-12 ui-md-12">
+                <p-table [value]="pets">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Espécie</th>
+                            <th>Raça</th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-pet>
+                        <tr>
+                            <td>{{pet.nome}}</td>
+                            <td>{{pet.especie}}</td>
+                            <td>{{pet.raca}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                </div>
+            </div>
+            </div>
+        </p-panel>
+    
+    </div>
+</div>
+
+<p-dialog [(visible)]="display" [style]="{width: '400px'}" [contentStyle]="{'height':'400px'}">
+    <p-header>
+        Novo Pet
+    </p-header>
+       <form *ngIf="display" [formGroup]="form" novalidate>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12">
+                    <div class="ui-g form-group">
+                        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+                            <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fa fa-paw"></i></span>
+                                    <input type="text" formControlName="nomeCliente" class="input-forms" pInputText placeholder="Nome do Cliente" [(ngModel)]="pet.nomeCliente"
+                                       >
+                                </div>
+                                <span class="md-inputfield">
+                                    <div *ngIf="isValidado('nomeCliente')" class="ui-message ui-messages-error">
+                                        Preenchimento obrigatório
+                                    </div>
+                                </span>
+    
+                            </div>
+                            <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fa fa-paw"></i></span>
+                                    <input type="text" formControlName="nome" class="input-forms" pInputText placeholder="Nome" [(ngModel)]="pet.nome"
+                                       >
+                                </div>
+                                <span class="md-inputfield">
+                                    <div *ngIf="isValidado('nome')" class="ui-message ui-messages-error">
+                                        Preenchimento obrigatório
+                                    </div>
+                                </span>
+    
+                            </div>
+                            <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fas fa-heart"></i></span>
+                                    <input type="text" formControlName="idade" class="input-forms" pInputText placeholder="Idade" [(ngModel)]="pet.idade"
+                                       >
+                                </div>
+                                <span class="md-inputfield">
+                                    <div *ngIf="isValidado('idade')" class="ui-message ui-messages-error">
+                                        Preenchimento obrigatório
+                                    </div>
+                                </span>
+    
+                            </div>
+                            <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                                <div class="ui-g-4 ui-md-4" style="padding: 0;width: 12%;">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="fa fa-venus-mars"></i></span>
+                                    </div>
+                                </div>
+                                <div class="ui-g-4 ui-md-4"
+                                    style="padding: 0;padding-top: 7px;width: 40%;padding-left: 15px;">
+                                    <p-radioButton name="genero" formControlName="genero" value="F" label="Fêmea"
+                                        [(ngModel)]="pet.genero"></p-radioButton>
+                                </div>
+                                <div class="ui-g-4 ui-md-4" style="padding: 0;width: 35%;padding-top: 7px;">
+                                    <p-radioButton name="genero" value="M" formControlName="genero" label="Macho"
+                                        [(ngModel)]="pet.genero"></p-radioButton>
+                                </div>
+                                <span class="md-inputfield">
+                                    <div *ngIf="isValidado('genero')" class="ui-message ui-messages-error">
+                                        Preenchimento obrigatório
+                                    </div>
+                                </span>
+      
+                            </div>
+                            <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fas fa-dog"></i></span>
+                                    <input type="text" formControlName="especie" class="input-forms" pInputText placeholder="Especie" [(ngModel)]="pet.especie"
+                                       >
+                                </div>
+                                <span class="md-inputfield">
+                                    <div *ngIf="isValidado('especie')" class="ui-message ui-messages-error">
+                                        Preenchimento obrigatório
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 ui-sm-12 ui-lg-12 ui-xl-12">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fas fa-bone"></i></span>
+                                    <input type="text" formControlName="raca" class="input-forms" pInputText placeholder="Raça" [(ngModel)]="pet.raca"
+                                       >
+                                </div>
+                                <span class="md-inputfield">
+                                    <div *ngIf="isValidado('raca')" class="ui-message ui-messages-error">
+                                        Preenchimento obrigatório
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                     </div> 
+                </div>      
+            </div>
+    
+        </form>
+        <p-footer>
+            <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+                <button pButton name="cancelar" id="cancelar" label="Cancelar"
+                    class="btnCancelar" (click)="display = false;"></button>
+                <button pButton name="salvar" id="salvar" label="Salvar" class="btnNovo"
+                    (click)="salvar()"></button>
+            </div>
+        </p-footer>
+   
+    
+</p-dialog>
