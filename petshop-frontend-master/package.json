@@ -29,7 +29,7 @@
     "@fullcalendar/interaction": "^4.4.0",
     "@fullcalendar/timegrid": "^4.4.0",
     "font-awesome": "^4.7.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "ng-block-ui": "^2.1.8",
     "ngx-mask": "^9.1.2",
     "primeicons": "^3.0.0-rc.1",
